@@ -13,3 +13,11 @@ docker-csbu ()
 {
   docker-compose stop $1 && docker-compose build --no-cache $1 && docker-compose up -d --force-recreate $1
 }
+
+# Shortcut to running shell inside a docker container searching $1
+# usage: $shbacano magento
+function shbacano() {
+    #do things with parameters like $1 such as
+    echo "running sh into $(docker ps | grep "$1" | awk '{print $1 " " $2}')";
+    docker exec -it `docker ps | grep "$1" | awk '{print $1}'` sh;
+}
