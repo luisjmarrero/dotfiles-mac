@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 # aliases and functions
 
 alias pcat='pygmentize -f terminal256 -O style=native -g'
