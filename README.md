@@ -3,16 +3,11 @@ These are my dotfiles.
 
 ## Setup
 
-I use zsh and oh-my-zsh, since I don't have my `.zshrc` in git yet I need to add this function to it
+I use zsh and oh-my-zsh, those need to be installed already.
 
-```shell
-# import aliases
-if [ -f ~/dotfiles/.aliases ]; then
-    . ~/dotfiles/.aliases
-else 
-    echo "no aliases file found!!"
-fi
-
+```zsh
+# backup your existing .zshrc
+cp ~/.zshrc ~/.zshrc-bk
+# copy the new .zshrc
+cp .zshrc ~/.zshrc
 ```
-
-> More files would be added in the future.
