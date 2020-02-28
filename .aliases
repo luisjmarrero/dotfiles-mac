@@ -1,0 +1,15 @@
+# aliases and functions
+
+alias pcat='pygmentize -f terminal256 -O style=native -g'
+
+# git add . commit -m and push master to origin
+gacp () 
+{
+  git add . && git commit -m $1 && git push origin master
+}
+
+# docker-compose stop build and up
+docker-csbu ()
+{
+  docker-compose stop $1 && docker-compose build --no-cache $1 && docker-compose up -d --force-recreate $1
+}
