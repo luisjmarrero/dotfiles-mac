@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+export PATH="$PATH:/Users/luisjmarrero/development/flutter/bin"
+
+export ANDROID_SDK_ROOT="/Users/luisjmarrero/Library/Android/sdk"
