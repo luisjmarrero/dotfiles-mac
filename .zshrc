@@ -27,3 +27,15 @@ fi
 if [ -f ~/dotfile/.exports ]; then
     . ~/dotfile/.exports
 fi
+
+# Context: user@hostname (who am I and where am I)
+prompt_context() {
+ if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+  fi
+}
+
+# Dir: current working directory
+prompt_dir() {
+  prompt_segment blue $CURRENT_FG '%c'
+}
