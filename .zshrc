@@ -5,7 +5,7 @@
 export ZSH="/Users/luisjmarrero/.oh-my-zsh"
 
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
