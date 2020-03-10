@@ -10,7 +10,10 @@ ZSH_THEME="agnoster"
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
 
-plugins=(git)
+plugins=(
+  git
+  zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
