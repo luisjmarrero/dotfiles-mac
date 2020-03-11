@@ -31,3 +31,8 @@ function shbacano() {
     echo "running sh into $(docker ps | grep "$1" | awk '{print $1 " " $2}')";
     docker exec -it `docker ps | grep "$1" | awk '{print $1}'` sh;
 }
+
+# delete all node_modules in current folder and sub folder
+prune-node-modules() {
+  find . -name "node_modules" -type d -prune -exec rm -rf '{}' +
+}
