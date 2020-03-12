@@ -36,3 +36,5 @@ function shbacano() {
 prune-node-modules() {
   find . -name "node_modules" -type d -prune -exec rm -rf '{}' +
 }
+
+alias kraken="open -na 'GitKraken' --args -p $(pwd)"
