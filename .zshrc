@@ -27,8 +27,10 @@ else
 fi
 
 # exports
-if [ -f ~/dotfile/.exports ]; then
-    . ~/dotfile/.exports
+if [ -f ~/dotfiles/.exports ]; then
+    . ~/dotfiles/.exports
+else 
+    echo "no exports file found!!"
 fi
 
 # Context: user@hostname (who am I and where am I)
