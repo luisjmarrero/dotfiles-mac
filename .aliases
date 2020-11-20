@@ -6,30 +6,35 @@ alias pcat='pygmentize -f terminal256 -O style=native -g'
 
 # git add . commit -m and push master to origin
 # usage: gacpm "commit message"
-gacpm () 
-{
+gacpm() {
   git add . && git commit -m $1 && git push origin master
 }
 
 # git add, commit and push
 # usage: gacp "commit message"
-gacp () 
-{
+gacp() {
   git add . && git commit -m $1 && git push
 }
 
 # docker-compose stop build and up
-docker-csbu ()
-{
+docker-csbu() {
   docker-compose stop $1 && docker-compose build --no-cache $1 && docker-compose up -d --force-recreate $1
 }
 
 # Shortcut to running shell inside a docker container searching $1
 # usage: $shbacano magento
 function shbacano() {
-    #do things with parameters like $1 such as
-    echo "running sh into $(docker ps | grep "$1" | awk '{print $1 " " $2}')";
-    docker exec -it `docker ps | grep "$1" | awk '{print $1}'` sh;
+  #do things with parameters like $1 such as
+  echo "running sh into $(docker ps | grep "$1" | awk '{print $1 " " $2}')"
+  docker exec -it $(docker ps | grep "$1" | awk '{print $1}') sh
+}
+
+# Shortcut to running shell inside a docker container searching $1
+# usage: $bashbacano magento
+function bashbacano() {
+  #do things with parameters like $1 such as
+  echo "running sh into $(docker ps | grep "$1" | awk '{print $1 " " $2}')"
+  docker exec -it $(docker ps | grep "$1" | awk '{print $1}') bash
 }
 
 # delete all node_modules in current folder and sub folder
@@ -38,3 +43,71 @@ prune-node-modules() {
 }
 
 alias kraken="open -na 'GitKraken' --args -p $(pwd)"
+
+# This is a general-purpose function to ask Yes/No questions in Bash, either
+# with or without a default answer. It keeps repeating the question until it
+# gets a valid answer.
+
+ask() {
+  local prompt default reply
+
+  if [ "${2:-}" = "Y" ]; then
+    prompt="Y/n"
+    default=Y
+  elif [ "${2:-}" = "N" ]; then
+    prompt="y/N"
+    default=N
+  else
+    prompt="y/n"
+    default=
+  fi
+
+  while true; do
+
+    # Ask the question (not using "read -p" as it uses stderr not stdout)
+    echo -n "$1 [$prompt] "
+
+    # Read the answer (use /dev/tty in case stdin is redirected from somewhere else)
+    read reply </dev/tty
+
+    # Default?
+    if [ -z "$reply" ]; then
+      reply=$default
+    fi
+
+    # Check if the reply is valid
+    case "$reply" in
+    Y* | y*) return 0 ;;
+    N* | n*) return 1 ;;
+    esac
+
+  done
+}
+
+# Find and kill process
+# usage: fkill python , fkill java
+function fkill() {
+  cnt=$(ps aux | grep -i $1 | grep -v grep | wc -l) # total count of processes found
+
+  echo -e "\nSearching for '$1' -- Found" $cnt "Running Processes .. "
+  ps aux | grep -i $1 | grep -v grep
+
+  if [ "$cnt" -gt 0 ]; then
+    # Default to Yes if the user presses enter without giving an answer:
+    if ask "\nAre you really sure you want to kill everything found?" Y; then
+      echo -e '\nTerminating' $cnt 'processes .. '
+
+      ps aux | grep -i $1 | grep -v grep | awk '{print $2}' | xargs sudo kill -9
+      echo -e "Done!\n"
+
+      echo "Running search again:"
+      ps aux | grep -i $1 | grep -v grep
+      echo -e "\n"
+    else
+      echo "Nothing were killed..."
+    fi
+  else
+    echo "Nothing to kill!"
+  fi
+
+}
