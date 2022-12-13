@@ -1,3 +1,4 @@
 .vscode
 .idea
 *.sh
+.zsh/work.zsh
