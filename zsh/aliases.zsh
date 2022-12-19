@@ -32,15 +32,15 @@ function gcb() {
 
 # docker aliases
 function dcu() {
-  docker-compose up -d --build --remove-orphans
+  docker compose up -d --build --remove-orphans
 }
 
 function dcuf() {
-  docker-compose up -d --build --remove-orphans --force-recreate
+  docker compose up -d --build --remove-orphans --force-recreate
 }
 
 docker-csbu() {
-  docker-compose stop $1 && docker-compose build --no-cache $1 && docker-compose up -d --force-recreate $1
+  docker compose stop $1 && docker compose build --no-cache $1 && docker compose up -d --force-recreate $1
 }
 
 function shbacano() {
