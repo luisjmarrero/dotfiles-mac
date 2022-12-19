@@ -21,7 +21,24 @@ function gacp() {
   git add . && git commit -m $1 && git push
 }
 
+function gcp() {
+  git commit -m $1 && git push
+}
+
+# clear branches
+function gcb() {
+  git branch -vv | grep ': gone]'|  grep -v "\*" | awk '{ print $1; }' | xargs -r git branch -d
+}
+
 # docker aliases
+function dcu() {
+  docker-compose up -d --build --remove-orphans
+}
+
+function dcuf() {
+  docker-compose up -d --build --remove-orphans --force-recreate
+}
+
 docker-csbu() {
   docker-compose stop $1 && docker-compose build --no-cache $1 && docker-compose up -d --force-recreate $1
 }
@@ -36,6 +53,11 @@ function bashbacano() {
   #do things with parameters like $1 such as
   echo "running sh into $(docker ps | grep "$1" | awk '{print $1 " " $2}')"
   docker exec -it $(docker ps | grep "$1" | awk '{print $1}') bash
+}
+
+# maven
+funtion clearmvn() {
+  rm -rf ~/.m2/repository
 }
 
 # node aliases
