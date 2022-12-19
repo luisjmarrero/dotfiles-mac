@@ -8,7 +8,7 @@ if [ -x "$(command -v exa)" ]; then
     alias ls="exa --icons"
     alias la="exa --long --all --group --icons"
     alias l='exa -lah --icons'
-    alias tree 'exa --tree --icons --all'
+    alias lt='exa --tree --icons --all'
 fi
 
 
