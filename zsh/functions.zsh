@@ -1,10 +1,14 @@
-# delete all node_modules in current folder and sub folder
-prune-node-modules() {
-  find . -name "node_modules" -type d -prune -exec rm -rf '{}' +
+# funtions.zsh
+
+source_if_exists () {
+    if test -r "$1"; then
+        source "$1"
+    fi
 }
 
-alias kraken="open -na 'GitKraken' --args -p $(pwd)"
 
+# legacy... but used sometimes...
+ 
 # This is a general-purpose function to ask Yes/No questions in Bash, either
 # with or without a default answer. It keeps repeating the question until it
 # gets a valid answer.
