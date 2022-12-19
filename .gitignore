@@ -1,4 +1,4 @@
 .vscode
 .idea
-*.sh
-.zsh/work.zsh
+**.DS_Store
+zsh/work.zsh
